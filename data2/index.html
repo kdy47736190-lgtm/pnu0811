@@ -39,6 +39,7 @@
             <button onclick="switchTab('weekly')" id="btn-weekly" class="tab-btn whitespace-nowrap text-slate-500 hover:text-slate-800 pb-1">3. 요일별 패턴</button>
             <button onclick="switchTab('risks')" id="btn-risks" class="tab-btn whitespace-nowrap text-slate-500 hover:text-slate-800 pb-1">4. 위험 요인 심층</button>
             <button onclick="switchTab('strategy')" id="btn-strategy" class="tab-btn whitespace-nowrap text-slate-500 hover:text-slate-800 pb-1">5. 전략적 제언</button>
+            <button onclick="switchTab('simulator')" id="btn-simulator" class="tab-btn whitespace-nowrap text-slate-500 hover:text-slate-800 pb-1">6. 🛡️ 인터랙티브 안전 시뮬레이터</button>
         </div>
     </nav>
 
@@ -371,6 +372,133 @@
             </div>
         </section>
 
+        <!-- Section 6: Interactive Safety Simulator -->
+        <section id="tab-simulator" class="tab-content space-y-6 hidden">
+            <div class="border-b border-slate-200 pb-4">
+                <h2 class="text-2xl font-bold text-slate-900">6. 🛡️ 자전거 안전 리스크 & 위험도 시뮬레이터</h2>
+                <p class="text-slate-500 mt-1 text-sm">주행 환경 요소를 선택·조정하여 나의 사고 위험 지수와 치사율 변화를 실시간으로 확인하세요.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Control Panel -->
+                <div class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                    <h3 class="font-bold text-slate-800 text-base border-b pb-3 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                        주행 환경 설정
+                    </h3>
+
+                    <!-- Month Selection -->
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-700 block">주행 계절/월 선택</label>
+                        <select id="simMonth" onchange="runSimulation()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none cursor-pointer">
+                            <option value="8">8월 (최고 위험/고치사율 시즌)</option>
+                            <option value="6">6월 (최다 사고 피크 시즌)</option>
+                            <option value="11">11월 (동절기 진입/주말 주의)</option>
+                            <option value="1">1월 (동절기 비수기)</option>
+                            <option value="5">5월 (봄철 야외활동 성수기)</option>
+                        </select>
+                    </div>
+
+                    <!-- Day Selection -->
+                    <div class="space-y-2">
+                        <label class="text-sm font-semibold text-slate-700 block">요일 선택</label>
+                        <select id="simDay" onchange="runSimulation()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm font-medium text-slate-800 focus:ring-2 focus:ring-indigo-500 focus:outline-none cursor-pointer">
+                            <option value="thu">목요일 (최고 치사율 요일)</option>
+                            <option value="fri">금요일 (최다 사고 요일)</option>
+                            <option value="sat">토요일 (주말 행락철 고위험)</option>
+                            <option value="sun">일요일</option>
+                            <option value="mon">월요일</option>
+                            <option value="tue">화요일</option>
+                            <option value="wed">수요일</option>
+                        </select>
+                    </div>
+
+                    <!-- Toggle Checks -->
+                    <div class="space-y-3 pt-2">
+                        <label class="text-sm font-semibold text-slate-700 block">안전 장비 및 조건</label>
+                        
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" id="chkHelmet" onchange="runSimulation()" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700 font-medium">안전모(헬멧) 착용</span>
+                        </label>
+
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" id="chkLight" onchange="runSimulation()" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700 font-medium">야간 전조등 및 반사판 장착</span>
+                        </label>
+
+                        <label class="flex items-center space-x-3 cursor-pointer p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" id="chkNight" onchange="runSimulation()" class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700 font-medium">야간/일몰 후 주행</span>
+                        </label>
+                    </div>
+
+                    <button onclick="resetSimulation()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-lg text-sm transition-colors cursor-pointer">설정 초기화</button>
+                </div>
+
+                <!-- Simulation Results Output -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-gradient-to-br from-slate-900 to-indigo-950 p-6 sm:p-8 rounded-2xl text-white shadow-xl flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div>
+                                <span class="bg-indigo-500/30 text-indigo-300 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">실시간 리스크 예측 결과</span>
+                                <h3 id="simResultTitle" class="text-2xl font-black mt-2">고위험 구간 주행 중</h3>
+                            </div>
+                            <div id="riskBadge" class="bg-rose-500 text-white font-extrabold text-sm px-4 py-2 rounded-xl shadow-md uppercase tracking-wider animate-pulse">
+                                고위험 (Risk Level 4)
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                                <p class="text-xs text-indigo-200">예상 사고 확률 지수</p>
+                                <h4 id="simScore" class="text-3xl font-black text-white mt-1">78 <span class="text-sm font-normal text-slate-300">/ 100점</span></h4>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                                <p class="text-xs text-indigo-200">추정 치사율 영향도</p>
+                                <h4 id="simFatality" class="text-3xl font-black text-rose-400 mt-1">2.15%</h4>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                                <p class="text-xs text-indigo-200">안전 보호 효과</p>
+                                <h4 id="simProtection" class="text-3xl font-black text-emerald-400 mt-1">+15% UP</h4>
+                            </div>
+                        </div>
+
+                        <div id="simAdviceBox" class="bg-indigo-900/60 border border-indigo-500/40 p-4 rounded-xl text-sm text-indigo-100 leading-relaxed">
+                            <strong>맞춤형 안전 가이드:</strong> 8월 목요일 주행 시 기상 악화 및 치명적 사고 위험이 매우 높습니다. 헬멧과 전조등을 반드시 점검하고 규정 속도를 준수하세요.
+                        </div>
+                    </div>
+
+                    <!-- Interactive Checklist Widget -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <h3 class="font-bold text-slate-800 text-base">📋 자가 진단 안전 체크리스트 (내 점수 확인)</h3>
+                        <div class="space-y-3" id="checklistContainer">
+                            <label class="flex items-start space-x-3 p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl cursor-pointer transition-colors">
+                                <input type="checkbox" onchange="updateChecklistScore()" class="check-item mt-1 w-4 h-4 text-indigo-600 rounded border-slate-300 cursor-pointer" checked>
+                                <span class="text-sm text-slate-700">출발 전 타이어 공기압 및 브레이크 작동 상태를 점검합니까?</span>
+                            </label>
+                            <label class="flex items-start space-x-3 p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl cursor-pointer transition-colors">
+                                <input type="checkbox" onchange="updateChecklistScore()" class="check-item mt-1 w-4 h-4 text-indigo-600 rounded border-slate-300 cursor-pointer" checked>
+                                <span class="text-sm text-slate-700">주행 중 스마트폰 사용이나 이어폰 착용을 하지 않습니까?</span>
+                            </label>
+                            <label class="flex items-start space-x-3 p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl cursor-pointer transition-colors">
+                                <input type="checkbox" onchange="updateChecklistScore()" class="check-item mt-1 w-4 h-4 text-indigo-600 rounded border-slate-300 cursor-pointer">
+                                <span class="text-sm text-slate-700">교차로 및 횡단보도 진입 시 반드시 일시정지하거나 속도를 줄입니까?</span>
+                            </label>
+                            <label class="flex items-start space-x-3 p-3 bg-slate-50 hover:bg-slate-100/80 rounded-xl cursor-pointer transition-colors">
+                                <input type="checkbox" onchange="updateChecklistScore()" class="check-item mt-1 w-4 h-4 text-indigo-600 rounded border-slate-300 cursor-pointer">
+                                <span class="text-sm text-slate-700">야간 주행 시 반광조끼 또는 고휘도 LED 후미등을 상시 켜고 있습니까?</span>
+                            </label>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-slate-100">
+                            <span class="text-sm font-semibold text-slate-600">나의 안전 실천 점수: <strong id="checklistScore" class="text-indigo-600 text-lg">50점</strong> / 100점</span>
+                            <span id="checklistFeedback" class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800">주의 단계</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Infographic Modal -->
@@ -429,6 +557,88 @@
             }
         }
 
+        // Simulator Logic
+        function runSimulation() {
+            const month = document.getElementById('simMonth').value;
+            const day = document.getElementById('simDay').value;
+            const helmet = document.getElementById('chkHelmet').checked;
+            const light = document.getElementById('chkLight').checked;
+            const night = document.getElementById('chkNight').checked;
+
+            let baseScore = 50;
+            if (month === '8') baseScore += 25;
+            if (month === '6') baseScore += 20;
+            if (month === '11') baseScore += 15;
+            if (day === 'thu') baseScore += 15;
+            if (day === 'fri') baseScore += 12;
+            if (day === 'sat') baseScore += 10;
+
+            let protection = 0;
+            if (helmet) protection += 25;
+            if (light) protection += 20;
+            if (night && !light) baseScore += 30;
+
+            let finalScore = Math.max(10, Math.min(98, baseScore - protection));
+            
+            let riskBadge = document.getElementById('riskBadge');
+            let simScoreEl = document.getElementById('simScore');
+            let simFatality = document.getElementById('simFatality');
+            let simProtection = document.getElementById('simProtection');
+            let simAdviceBox = document.getElementById('simAdviceBox');
+
+            simScoreEl.innerHTML = `${finalScore} <span class="text-sm font-normal text-slate-300">/ 100점</span>`;
+            simProtection.innerText = `+${protection}% 보호`;
+
+            let fatalityVal = "1.62%";
+            if (month === '8') fatalityVal = "2.15%";
+            else if (month === '11') fatalityVal = "1.94%";
+            else if (month === '6') fatalityVal = "1.49%";
+            simFatality.innerText = fatalityVal;
+
+            if (finalScore >= 70) {
+                riskBadge.className = "bg-rose-600 text-white font-extrabold text-sm px-4 py-2 rounded-xl shadow-md uppercase tracking-wider animate-pulse";
+                riskBadge.innerText = "🚨 고위험 주의보";
+                simAdviceBox.innerHTML = `<strong>경고:</strong> 선택하신 주행 환경은 사고 및 치명상 위험이 매우 높습니다. 헬멧과 전조등을 반드시 착용하고 야간 주행을 자제하세요.`;
+            } else if (finalScore >= 40) {
+                riskBadge.className = "bg-amber-500 text-white font-extrabold text-sm px-4 py-2 rounded-xl shadow-md uppercase tracking-wider";
+                riskBadge.innerText = "⚠️ 주의 필요";
+                simAdviceBox.innerHTML = `<strong>주의:</strong> 일반적인 자전거 사고 위험이 존재합니다. 규정 속도 준수 및 교차로 진입 시 주의가 필요합니다.`;
+            } else {
+                riskBadge.className = "bg-emerald-600 text-white font-extrabold text-sm px-4 py-2 rounded-xl shadow-md uppercase tracking-wider";
+                riskBadge.innerText = "✅ 안전 주행 구간";
+                simAdviceBox.innerHTML = `<strong>안전:</strong> 안전 장비가 잘 갖추어져 있으며 위험도가 낮습니다. 이 상태를 유지하세요!`;
+            }
+        }
+
+        function resetSimulation() {
+            document.getElementById('simMonth').value = '8';
+            document.getElementById('simDay').value = 'thu';
+            document.getElementById('chkHelmet').checked = true;
+            document.getElementById('chkLight').checked = true;
+            document.getElementById('chkNight').checked = false;
+            runSimulation();
+        }
+
+        function updateChecklistScore() {
+            const checks = document.querySelectorAll('.check-item');
+            let checkedCount = 0;
+            checks.forEach(chk => { if(chk.checked) checkedCount++; });
+            let score = (checkedCount / checks.length) * 100;
+            document.getElementById('checklistScore').innerText = score + '점';
+            
+            let feedback = document.getElementById('checklistFeedback');
+            if (score === 100) {
+                feedback.className = "text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800";
+                feedback.innerText = "완벽한 안전 모범생!";
+            } else if (score >= 50) {
+                feedback.className = "text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800";
+                feedback.innerText = "보통 (개선 필요)";
+            } else {
+                feedback.className = "text-xs font-bold px-3 py-1 rounded-full bg-rose-100 text-rose-800";
+                feedback.innerText = "위험 (안전 수칙 점검 시급)";
+            }
+        }
+
         // Infographic Modal functions
         function openInfographicModal() {
             document.getElementById('infographicModal').classList.remove('hidden');
@@ -449,6 +659,9 @@
 
         // Initialize Charts on window load
         window.addEventListener('DOMContentLoaded', () => {
+            runSimulation();
+            updateChecklistScore();
+
             // Monthly Chart
             const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
             window.monthlyChartInstance = new Chart(monthlyCtx, {
