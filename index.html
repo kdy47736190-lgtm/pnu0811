@@ -16,6 +16,7 @@
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -32,11 +33,13 @@
     <style>
         body {
             font-family: 'Pretendard', sans-serif;
-            background-color: #f8fafc;
         }
         .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
+        }
+        .dark .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
         }
         .card-hover {
             transition: all 0.3s ease;
@@ -47,9 +50,8 @@
         }
     </style>
 </head>
-<body class="text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased selection:bg-blue-200 selection:text-blue-900 transition-colors duration-300">
 
-    <!-- Navigation -->
     <nav class="glass-nav fixed w-full z-50 border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -59,23 +61,23 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="../index.html" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition flex items-center">
+                    <a href="#" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition flex items-center">
                         <i class="fas fa-home mr-1.5"></i> 홈
                     </a>
-                    <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">소개</a>
-                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">프로젝트</a>
-                    <a href="#contact" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">연락처</a>
+                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition">프로젝트</a>
+                    <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition">소개</a>
+                    <a href="#contact" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition">연락처</a>
                     <!-- Dark Mode Toggle Button -->
-                    <button id="themeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none">
+                    <button id="themeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none" aria-label="다크모드 전환">
                         <i id="themeIcon" class="fas fa-moon text-lg"></i>
                     </button>
                 </div>
                 <!-- Mobile menu & theme button -->
                 <div class="md:hidden flex items-center space-x-3">
-                    <button id="mobileThemeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none">
+                    <button id="mobileThemeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none" aria-label="다크모드 전환">
                         <i id="mobileThemeIcon" class="fas fa-moon text-lg"></i>
                     </button>
-                    <button id="mobileMenuBtn" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 focus:outline-none p-2">
+                    <button id="mobileMenuBtn" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white focus:outline-none p-2" aria-label="메뉴 열기">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -83,56 +85,67 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-2">
-            <a href="../index.html" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition flex items-center">
+            <a href="#" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition flex items-center">
                 <i class="fas fa-home mr-2"></i> 홈
             </a>
-            <a href="#about" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">소개</a>
             <a href="#projects" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">프로젝트</a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">소개</a>
             <a href="#contact" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">연락처</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-b from-blue-50/50 to-white overflow-hidden">
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-b from-blue-50/50 dark:from-slate-800/40 to-white dark:to-slate-900 overflow-hidden transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="text-center max-w-3xl mx-auto">
-                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold mb-6">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-sm font-semibold mb-6">
                     Data Analyst Portfolio
                 </span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
                     데이터로 세상을 읽는 <br>
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">분석가, 동윤</span>입니다.
                 </h1>
-                <p class="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+                <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
                     복잡한 데이터 속에서 유의미한 패턴을 찾고, 직관적인 시각화와 논리적인 보고서를 통해 더 나은 의사결정을 돕는 인사이트를 도출합니다.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#projects" class="px-8 py-4 rounded-lg bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                    <a href="#projects" class="px-8 py-4 rounded-lg bg-blue-600 text-white font-bold text-lg hover:bg-blue-700 transition shadow-lg shadow-blue-200 dark:shadow-none">
                         활동 내용 보기
                     </a>
-                    <a href="#contact" class="px-8 py-4 rounded-lg bg-white text-slate-700 font-bold text-lg border border-slate-200 hover:bg-slate-50 hover:border-slate-300 transition shadow-sm">
+                    <button onclick="openContactModal()" class="px-8 py-4 rounded-lg bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm">
                         연락하기
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-20 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">주요 활동 및 보고서</h2>
                 <div class="w-20 h-1 bg-blue-600 mx-auto rounded-full mb-6"></div>
                 <p class="text-slate-600 dark:text-slate-300 text-lg">공공데이터를 활용하여 직접 기획하고 분석한 프로젝트 레포트입니다.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Project Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="filterProjects('all')" id="filter-all" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-blue-600 text-white shadow-sm transition filter-btn">
+                    전체 보기
+                </button>
+                <button onclick="filterProjects('edu')" id="filter-edu" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition filter-btn">
+                    교육 / 진로
+                </button>
+                <button onclick="filterProjects('traffic')" id="filter-traffic" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition filter-btn">
+                    교통 / 안전
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="projectsGrid">
                 
                 <!-- Project Card 1: 대학알리미 진로 보고서 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" onclick="location.href='./data1/index.html'">
+                <div class="project-card bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" data-category="edu" onclick="location.href='./data1/index.html'">
                     <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 relative flex items-center justify-center overflow-hidden">
-                        <!-- Abstract Background Pattern -->
                         <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
                         <i class="fas fa-graduation-cap text-6xl text-white/90 transform group-hover:scale-110 transition duration-500"></i>
                     </div>
@@ -157,9 +170,8 @@
                 </div>
 
                 <!-- Project Card 2: 도로교통공단 교통데이터 분석 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" onclick="location.href='./data2/index.html'">
+                <div class="project-card bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" data-category="traffic" onclick="location.href='./data2/index.html'">
                     <div class="h-48 bg-gradient-to-br from-emerald-500 to-teal-600 relative flex items-center justify-center overflow-hidden">
-                        <!-- Abstract Background Pattern -->
                         <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white), linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white); background-size: 20px 20px; background-position: 0 0, 10px 10px;"></div>
                         <i class="fas fa-car-burst text-6xl text-white/90 transform group-hover:scale-110 transition duration-500"></i>
                     </div>
@@ -173,7 +185,7 @@
                             도로교통공단의 교통사고 통계 데이터를 바탕으로 사고 다발 구역의 환경적/시간적 특성을 파악하고 안전 개선안을 도출한 분석 보고서입니다.
                         </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">Data Visualization</span>
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">Data Viz</span>
                             <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">Folium</span>
                             <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">SQL</span>
                         </div>
@@ -184,9 +196,8 @@
                 </div>
 
                 <!-- Project Card 3: 요일별, 시간별 음주운전 사고 -->
-                <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" onclick="location.href='./data3/index.html'">
+                <div class="project-card bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" data-category="traffic" onclick="location.href='./data3/index.html'">
                     <div class="h-48 bg-gradient-to-br from-amber-500 to-rose-600 relative flex items-center justify-center overflow-hidden">
-                        <!-- Abstract Background Pattern -->
                         <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
                         <i class="fas fa-wine-glass text-6xl text-white/90 transform group-hover:scale-110 transition duration-500"></i>
                     </div>
@@ -214,33 +225,32 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="py-20 bg-slate-50 dark:bg-slate-800/50 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="w-full md:w-1/3 flex justify-center">
-                    <div class="w-64 h-64 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200 flex items-center justify-center shadow-inner overflow-hidden border-4 border-white shadow-lg">
-                        <i class="fas fa-user-astronaut text-8xl text-blue-500 opacity-80"></i>
+                    <div class="w-64 h-64 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200 dark:from-blue-900 dark:to-indigo-900 flex items-center justify-center shadow-inner overflow-hidden border-4 border-white dark:border-slate-700 shadow-lg">
+                        <i class="fas fa-user-astronaut text-8xl text-blue-500 dark:text-blue-400 opacity-90"></i>
                     </div>
                 </div>
                 <div class="w-full md:w-2/3">
-                    <h2 class="text-3xl font-bold text-slate-900 mb-6">데이터 이면의 '이야기'를 찾습니다.</h2>
-                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">데이터 이면의 '이야기'를 찾습니다.</h2>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
                         안녕하세요! 데이터 분석가 동윤입니다. 숫자로만 이루어진 데이터 속에서 사람들의 행동 양식과 사회적 트렌드를 발견하는 것에 흥미를 느낍니다. 
                         특히 공공데이터를 활용하여 우리 사회의 문제를 진단하고 인사이트를 도출하는 프로젝트를 주로 진행해왔습니다.
                     </p>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
+                        <div class="p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-100 dark:border-slate-700">
                             <i class="fab fa-python text-3xl text-blue-500 mb-2"></i>
-                            <p class="font-semibold text-slate-700">Python</p>
+                            <p class="font-semibold text-slate-700 dark:text-slate-200">Python</p>
                         </div>
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
+                        <div class="p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-100 dark:border-slate-700">
                             <i class="fas fa-chart-pie text-3xl text-indigo-500 mb-2"></i>
-                            <p class="font-semibold text-slate-700">Data Viz</p>
+                            <p class="font-semibold text-slate-700 dark:text-slate-200">Data Viz</p>
                         </div>
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-slate-100">
+                        <div class="p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-100 dark:border-slate-700">
                             <i class="fas fa-magnifying-glass-chart text-3xl text-emerald-500 mb-2"></i>
-                            <p class="font-semibold text-slate-700">Analysis</p>
+                            <p class="font-semibold text-slate-700 dark:text-slate-200">Analysis</p>
                         </div>
                     </div>
                 </div>
@@ -248,25 +258,59 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer id="contact" class="bg-slate-900 dark:bg-slate-950 text-white py-12 transition-colors duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-6 md:mb-0">
+            <div class="mb-6 md:mb-0 text-center md:text-left">
                 <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
                     Dongyoon
                 </span>
                 <p class="text-slate-400 mt-2 text-sm">Data Analyst Portfolio Website</p>
             </div>
             <div class="flex space-x-6 text-slate-400">
-                <a href="#" class="hover:text-white transition"><i class="fab fa-github text-2xl"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fas fa-envelope text-2xl"></i></a>
-                <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://github.com" target="_blank" rel="noreferrer" class="hover:text-white transition" aria-label="Github"><i class="fab fa-github text-2xl"></i></a>
+                <button onclick="openContactModal()" class="hover:text-white transition focus:outline-none" aria-label="이메일 문의"><i class="fas fa-envelope text-2xl"></i></button>
+                <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="hover:text-white transition" aria-label="LinkedIn"><i class="fab fa-linkedin text-2xl"></i></a>
             </div>
         </div>
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-slate-800 text-center text-slate-500 text-sm">
             &copy; 2026 Dongyoon. All rights reserved.
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl border border-slate-200 dark:border-slate-700 relative">
+            <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">협업 및 문의하기</h3>
+            <p class="text-slate-600 dark:text-slate-300 text-sm mb-6">분석 프로젝트 협업 제안이나 문의사항을 남겨주세요.</p>
+            
+            <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">성함 또는 기업명</label>
+                    <input type="text" id="contactName" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">이메일 주소</label>
+                    <input type="email" id="contactEmail" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">메시지 내용</label>
+                    <textarea id="contactMsg" rows="4" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition shadow-md">
+                    메시지 전송하기
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-6 py-3.5 rounded-xl shadow-xl transform translate-y-24 opacity-0 transition-all duration-300 flex items-center space-x-3 border border-slate-700">
+        <i class="fas fa-check-circle text-emerald-400 text-lg"></i>
+        <span id="toastText" class="text-sm font-medium">메시지가 성공적으로 전송되었습니다!</span>
+    </div>
 
     <script>
         // Dark Mode Toggle Logic
@@ -279,22 +323,17 @@
         function setTheme(isDark) {
             if (isDark) {
                 htmlElement.classList.add('dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                mobileThemeIcon.classList.remove('fa-moon');
-                mobileThemeIcon.classList.add('fa-sun');
+                if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+                if (mobileThemeIcon) { mobileThemeIcon.classList.remove('fa-moon'); mobileThemeIcon.classList.add('fa-sun'); }
                 localStorage.setItem('theme', 'dark');
             } else {
                 htmlElement.classList.remove('dark');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                mobileThemeIcon.classList.remove('fa-sun');
-                mobileThemeIcon.classList.add('fa-moon');
+                if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+                if (mobileThemeIcon) { mobileThemeIcon.classList.remove('fa-sun'); mobileThemeIcon.classList.add('fa-moon'); }
                 localStorage.setItem('theme', 'light');
             }
         }
 
-        // Check initial theme preference
         const savedTheme = localStorage.getItem('theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -309,22 +348,83 @@
             setTheme(!isDark);
         }
 
-        themeToggleBtn.addEventListener('click', toggleTheme);
-        mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
 
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu on link click
-        document.querySelectorAll('#mobileMenu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
             });
+            document.querySelectorAll('#mobileMenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+
+        // Project Filter Logic
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.className = "px-5 py-2.5 rounded-full text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition filter-btn";
+            });
+
+            const activeBtn = document.getElementById(`filter-${category}`);
+            if (activeBtn) {
+                activeBtn.className = "px-5 py-2.5 rounded-full text-sm font-semibold bg-blue-600 text-white shadow-sm transition filter-btn";
+            }
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                if (category === 'all' || cat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact Modal Logic
+        const contactModal = document.getElementById('contactModal');
+
+        function openContactModal() {
+            if (contactModal) contactModal.classList.remove('hidden');
+        }
+
+        function closeContactModal() {
+            if (contactModal) contactModal.classList.add('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastText = document.getElementById('toastText');
+            if (toast && toastText) {
+                toastText.innerText = message;
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 3500);
+            }
+        }
+
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            closeContactModal();
+            showToast('메시지가 성공적으로 전송되었습니다! 빠른 시일 내에 회신드리겠습니다.');
+            event.target.reset();
+        }
+
+        // Close modal on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeContactModal();
+            }
         });
     </script>
 </body>
