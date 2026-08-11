@@ -50,7 +50,7 @@
 <body class="text-slate-800 antialiased selection:bg-blue-200 selection:text-blue-900">
 
     <!-- Navigation -->
-    <nav class="glass-nav fixed w-full z-50 border-b border-slate-200 transition-all duration-300">
+    <nav class="glass-nav fixed w-full z-50 border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex-shrink-0 flex items-center">
@@ -58,18 +58,37 @@
                         Dongyoon.Portfolio
                     </a>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-slate-600 hover:text-blue-600 font-medium transition">소개</a>
-                    <a href="#projects" class="text-slate-600 hover:text-blue-600 font-medium transition">프로젝트</a>
-                    <a href="#contact" class="text-slate-600 hover:text-blue-600 font-medium transition">연락처</a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="../index.html" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition flex items-center">
+                        <i class="fas fa-home mr-1.5"></i> 홈
+                    </a>
+                    <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">소개</a>
+                    <a href="#projects" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">프로젝트</a>
+                    <a href="#contact" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">연락처</a>
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="themeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none">
+                        <i id="themeIcon" class="fas fa-moon text-lg"></i>
+                    </button>
                 </div>
-                <!-- Mobile menu button -->
-                <div class="md:hidden flex items-center">
-                    <button class="text-slate-600 hover:text-slate-900 focus:outline-none">
+                <!-- Mobile menu & theme button -->
+                <div class="md:hidden flex items-center space-x-3">
+                    <button id="mobileThemeToggle" class="p-2 rounded-full text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none">
+                        <i id="mobileThemeIcon" class="fas fa-moon text-lg"></i>
+                    </button>
+                    <button id="mobileMenuBtn" class="text-slate-600 dark:text-slate-300 hover:text-slate-900 focus:outline-none p-2">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white/95 dark:bg-slate-900/95 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <a href="../index.html" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition flex items-center">
+                <i class="fas fa-home mr-2"></i> 홈
+            </a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">소개</a>
+            <a href="#projects" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">프로젝트</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 font-medium transition">연락처</a>
         </div>
     </nav>
 
@@ -108,7 +127,7 @@
                 <p class="text-slate-600 dark:text-slate-300 text-lg">공공데이터를 활용하여 직접 기획하고 분석한 프로젝트 레포트입니다.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 
                 <!-- Project Card 1: 대학알리미 진로 보고서 -->
                 <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" onclick="location.href='./data1/index.html'">
@@ -159,6 +178,33 @@
                             <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">SQL</span>
                         </div>
                         <button class="w-full py-3 bg-slate-50 dark:bg-slate-700/50 text-emerald-600 dark:text-emerald-400 font-semibold rounded-lg group-hover:bg-emerald-50 dark:group-hover:bg-emerald-900/30 transition flex items-center justify-center">
+                            보고서 열람하기 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: 요일별, 시간별 음주운전 사고 -->
+                <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 overflow-hidden card-hover group flex flex-col h-full cursor-pointer" onclick="location.href='./data3/index.html'">
+                    <div class="h-48 bg-gradient-to-br from-amber-500 to-rose-600 relative flex items-center justify-center overflow-hidden">
+                        <!-- Abstract Background Pattern -->
+                        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
+                        <i class="fas fa-wine-glass text-6xl text-white/90 transform group-hover:scale-110 transition duration-500"></i>
+                    </div>
+                    <div class="p-8 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 text-xs font-bold rounded-full">교통/안전</span>
+                            <span class="text-slate-400 text-sm"><i class="fas fa-database mr-1"></i>도로교통공단</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">요일별, 시간별 음주운전 사고 요인 분석</h3>
+                        <p class="text-slate-600 dark:text-slate-300 mb-6 flex-grow leading-relaxed">
+                            요일 및 시간대별 음주운전 교통사고 발생 패턴을 분석하고, 고위험 시간대 집중 단속 및 예방 정책 수립을 위한 인사이트를 도출한 보고서입니다.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">Python</span>
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">Pandas</span>
+                            <span class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-xs rounded">Seaborn</span>
+                        </div>
+                        <button class="w-full py-3 bg-slate-50 dark:bg-slate-700/50 text-amber-600 dark:text-amber-400 font-semibold rounded-lg group-hover:bg-amber-50 dark:group-hover:bg-amber-900/30 transition flex items-center justify-center">
                             보고서 열람하기 <i class="fas fa-arrow-right ml-2 text-sm"></i>
                         </button>
                     </div>
